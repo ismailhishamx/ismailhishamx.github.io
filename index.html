@@ -42,6 +42,13 @@
 </head>
 <body>
 
+<!-- Scroll Progress Bar -->
+<div id="scroll-progress"></div>
+
+<!-- Background Ambient Glow Orbs -->
+<div class="ambient-glow ambient-glow-1"></div>
+<div class="ambient-glow ambient-glow-2"></div>
+
 <!--
 ===========================================================================
 3. NAVIGATION HEADER
@@ -59,6 +66,9 @@
         </ul>
         <button id="theme-toggle" aria-label="Toggle theme">
             <i data-lucide="moon" id="theme-icon"></i>
+        </button>
+        <button id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+            <i data-lucide="menu" id="menu-icon"></i>
         </button>
     </div>
 </nav>
@@ -186,23 +196,88 @@
             <div class="section-header">
                 <span class="section-label">03. Projects</span>
                 <h2 class="section-title">Selected Work</h2>
+                
+                <!-- Project Filter Tabs -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="mobile">Flutter Mobile</button>
+                    <button class="filter-btn" data-filter="java">Java OOP</button>
+                </div>
             </div>
+            
             <div class="projects-grid">
-                <article class="project-card">
-                    <div class="project-icon">🚗</div>
+                <article class="project-card" data-category="mobile">
+                    <div class="project-card-header">
+                        <div class="project-icon">🚗</div>
+                        <span class="project-badge">Featured</span>
+                    </div>
                     <h3>Waslny Maak</h3>
-                    <p>Real-time carpooling app for Cairo. Integrated OpenStreetMap, managed state with Bloc, and used Firebase for backend. Pixel-accurate UI designed in Figma.</p>
+                    <p>Real-time carpooling mobile app for Cairo. Features live location tracking with OpenStreetMap, reliable state management via Bloc, and Firebase backend integration. Designed pixel-perfect with Figma.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Dart</span>
+                        <span class="tech-tag">Bloc</span>
+                        <span class="tech-tag">Firebase</span>
+                    </div>
                     <div class="project-links">
-                        <a href="https://github.com/ismailhishamx/Waslny-Maak--Carpooling-.git" target="_blank" class="project-link">GitHub <i data-lucide="github" style="width: 14px"></i></a>
+                        <a href="https://github.com/ismailhishamx/Waslny-Maak--Carpooling-.git" target="_blank" class="project-link">
+                            Code <i data-lucide="github" style="width: 14px"></i>
+                        </a>
                     </div>
                 </article>
 
-                <article class="project-card">
-                    <div class="project-icon">🏦</div>
-                    <h3>Bank System</h3>
-                    <p>Java console application demonstrating advanced OOP principles. Supports account management, transactions, and client/employee operations.</p>
+                <article class="project-card" data-category="mobile">
+                    <div class="project-card-header">
+                        <div class="project-icon">🛍️</div>
+                        <span class="project-badge">Coursework</span>
+                    </div>
+                    <h3>Route E-Commerce</h3>
+                    <p>A full-featured shopping application built as part of the Route Academy diploma. Utilizes Clean Architecture, Bloc/Cubit state management, REST API integration, dependency injection, and secure local data persistence.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Dart</span>
+                        <span class="tech-tag">Clean Arch</span>
+                        <span class="tech-tag">REST API</span>
+                    </div>
                     <div class="project-links">
-                        <span class="tag" style="font-size: 0.75rem;">Java OOP</span>
+                        <a href="https://github.com/ismailhishamx" target="_blank" class="project-link">
+                            GitHub <i data-lucide="external-link" style="width: 14px"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="mobile">
+                    <div class="project-card-header">
+                        <div class="project-icon">✅</div>
+                    </div>
+                    <h3>Todo Tasker</h3>
+                    <p>A sleek productivity and task manager mobile app focusing on smooth user experience. Uses Hive for blazing-fast local caching, custom animations, categories, local notifications, and auto dark/light theme switching.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Hive DB</span>
+                        <span class="tech-tag">Cubit</span>
+                        <span class="tech-tag">Notifications</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/ismailhishamx" target="_blank" class="project-link">
+                            GitHub <i data-lucide="external-link" style="width: 14px"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="java">
+                    <div class="project-card-header">
+                        <div class="project-icon">🏦</div>
+                    </div>
+                    <h3>Bank Management</h3>
+                    <p>Robust console application written in Java showcasing advanced OOP practices (Inheritance, Polymorphism, Encapsulation). Manages client and employee entities, bank transfers, and account histories.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">OOP</span>
+                        <span class="tech-tag">Console</span>
+                    </div>
+                    <div class="project-links">
+                        <span class="project-link-disabled">Java OOP Console</span>
                     </div>
                 </article>
             </div>
@@ -219,38 +294,48 @@
             <div class="about-grid">
                 <div>
                     <span class="section-label">04. Education</span>
-                    <h2 class="section-title">Academic Background</h2>
-                    <div class="about-facts" style="margin-top: 2rem">
-                        <div class="fact-card">
-                            <span>2021 — 2025</span>
-                            <div><strong>B.Sc. Computer Science</strong></div>
-                            <div style="font-size: 0.9rem; color: var(--text-muted)">Arab Open University, Cairo</div>
-                            <a href="https://drive.google.com/file/d/1zvK0lPTHtCI3397oPgSHxXOB3eGPFDE8/view" target="_blank" style="font-size: 0.8rem; color: var(--accent);">View Certificate</a>
+                    <h2 class="section-title">Academic Journey</h2>
+                    <div class="timeline" style="margin-top: 2rem">
+                        <div class="timeline-item">
+                            <span class="timeline-date">2026 — Present</span>
+                            <div class="timeline-title">Flutter Mobile Development</div>
+                            <div class="timeline-subtitle">Route Academy, Cairo</div>
+                            <p class="timeline-text">Deep-dive training targeting production-ready app architecture, REST APIs, Bloc state management, clean architecture, and UI/UX patterns.</p>
                         </div>
-                        <div class="fact-card">
-                            <span>2026 — Present</span>
-                            <div><strong>Flutter Mobile Development</strong></div>
-                            <div style="font-size: 0.9rem; color: var(--text-muted)">Route Academy, Cairo</div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">2021 — 2025</span>
+                            <div class="timeline-title">B.Sc. Computer Science</div>
+                            <div class="timeline-subtitle">Arab Open University, Cairo</div>
+                            <a href="https://drive.google.com/file/d/1zvK0lPTHtCI3397oPgSHxXOB3eGPFDE8/view" target="_blank" class="timeline-link">
+                                View Certificate <i data-lucide="external-link" style="width: 12px;"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <span class="section-label">Certificates</span>
-                    <div class="about-facts" style="margin-top: 2rem">
-                        <div class="fact-card">
-                            <span>2024</span>
-                            <div>Android Development Diploma</div>
-                            <a href="https://drive.google.com/file/d/1YQefmqYmEi3eviFAXkuozNXMf_rbw_Rh/view" target="_blank" style="font-size: 0.8rem; color: var(--accent);">View</a>
+                    <span class="section-label">Credentials</span>
+                    <h2 class="section-title">Certifications</h2>
+                    <div class="timeline" style="margin-top: 2rem">
+                        <div class="timeline-item">
+                            <span class="timeline-date">2024</span>
+                            <div class="timeline-title">Android Development Diploma</div>
+                            <a href="https://drive.google.com/file/d/1YQefmqYmEi3eviFAXkuozNXMf_rbw_Rh/view" target="_blank" class="timeline-link">
+                                View Certificate <i data-lucide="external-link" style="width: 12px;"></i>
+                            </a>
                         </div>
-                        <div class="fact-card">
-                            <span>2023</span>
-                            <div>Programming Fundamentals (Java)</div>
-                            <a href="https://drive.google.com/file/d/1l0gHP8kAev4cFkwjr5pV3fOt3DOS3P21/view" target="_blank" style="font-size: 0.8rem; color: var(--accent);">View</a>
+                        <div class="timeline-item">
+                            <span class="timeline-date">2023</span>
+                            <div class="timeline-title">Programming Fundamentals (Java)</div>
+                            <a href="https://drive.google.com/file/d/1l0gHP8kAev4cFkwjr5pV3fOt3DOS3P21/view" target="_blank" class="timeline-link">
+                                View Certificate <i data-lucide="external-link" style="width: 12px;"></i>
+                            </a>
                         </div>
-                        <div class="fact-card">
-                            <span>2023</span>
-                            <div>Web Design</div>
-                            <a href="https://drive.google.com/file/d/1WdxhxFG7N8uWexpSHBZYO5QJUIr2Q-UP/view" target="_blank" style="font-size: 0.8rem; color: var(--accent);">View</a>
+                        <div class="timeline-item">
+                            <span class="timeline-date">2023</span>
+                            <div class="timeline-title">Web Design</div>
+                            <a href="https://drive.google.com/file/d/1WdxhxFG7N8uWexpSHBZYO5QJUIr2Q-UP/view" target="_blank" class="timeline-link">
+                                View Certificate <i data-lucide="external-link" style="width: 12px;"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -311,8 +396,8 @@
                     <div class="form-success">
                         <i data-lucide="check-circle" style="width: 48px; height: 48px; margin-bottom: 1rem;"></i>
                         <h3>Message Sent!</h3>
-                        <p>Thank you, Ismail. I'll get back to you as soon as possible.</p>
-                        <button class="btn btn-outline" style="margin-top: 1.5rem;" onclick="location.reload()">Send Another</button>
+                        <p>Thank you for reaching out! I will get back to you as soon as possible.</p>
+                        <button id="reset-form-btn" class="btn btn-outline" style="margin-top: 1.5rem;">Send Another</button>
                     </div>
                 </div>
             </div>
