@@ -27,11 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const html = document.documentElement;
     const themeIcon = document.getElementById('theme-icon');
 
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        html.setAttribute('data-theme', savedTheme);
-        updateIcon(savedTheme);
-    }
+    // Default to dark theme if no preference is saved
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
 
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
