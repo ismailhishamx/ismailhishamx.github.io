@@ -24,17 +24,43 @@ document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
 
     /**
-     * 2. THEME TOGGLE SYSTEM
+     * 2. THEME & ACCENT COLOR SYSTEM
      * -----------------------------------------------------------------------
      */
     const themeBtn = document.getElementById('theme-toggle');
     const html = document.documentElement;
     const themeIcon = document.getElementById('theme-icon');
 
-    // Default to dark theme if no preference is saved
+    // Accent colors config
+    const colorsConfig = {
+        teal: {
+            light: { accent: '171, 77%, 40%', secondary: '226, 70%, 50%' },
+            dark: { accent: '171, 80%, 50%', secondary: '217, 91%, 60%' }
+        },
+        indigo: {
+            light: { accent: '226, 70%, 50%', secondary: '262, 80%, 50%' },
+            dark: { accent: '226, 80%, 60%', secondary: '262, 83%, 60%' }
+        },
+        emerald: {
+            light: { accent: '142, 71%, 45%', secondary: '171, 77%, 40%' },
+            dark: { accent: '142, 76%, 50%', secondary: '171, 80%, 50%' }
+        },
+        violet: {
+            light: { accent: '262, 80%, 50%', secondary: '346, 87%, 50%' },
+            dark: { accent: '262, 83%, 60%', secondary: '346, 90%, 60%' }
+        },
+        rose: {
+            light: { accent: '346, 87%, 50%', secondary: '262, 80%, 50%' },
+            dark: { accent: '346, 90%, 60%', secondary: '262, 83%, 60%' }
+        }
+    };
+
     const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedColor = localStorage.getItem('accent-color') || 'teal';
+    
     html.setAttribute('data-theme', savedTheme);
     updateIcon(savedTheme);
+    applyAccentColor(savedColor, savedTheme);
 
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
@@ -44,6 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
+            
+            // Re-apply current accent color with the new theme HSL adjustments
+            const currentAccent = localStorage.getItem('accent-color') || 'teal';
+            applyAccentColor(currentAccent, newTheme);
         });
     }
 
@@ -53,6 +83,34 @@ document.addEventListener('DOMContentLoaded', () => {
         themeIcon.setAttribute('data-lucide', newIconName);
         lucide.createIcons();
     }
+
+    function applyAccentColor(color, theme) {
+        const activeTheme = theme || html.getAttribute('data-theme') || 'dark';
+        const config = colorsConfig[color]?.[activeTheme] || colorsConfig['teal'][activeTheme];
+        
+        html.style.setProperty('--accent-hsl', config.accent);
+        html.style.setProperty('--accent-secondary-hsl', config.secondary);
+        
+        localStorage.setItem('accent-color', color);
+        
+        // Update picker active status classes
+        document.querySelectorAll('.color-dot').forEach(dot => {
+            if (dot.getAttribute('data-color') === color) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    // Attach click events to color dots
+    document.querySelectorAll('.color-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+            const color = dot.getAttribute('data-color');
+            const currentTheme = html.getAttribute('data-theme') || 'dark';
+            applyAccentColor(color, currentTheme);
+        });
+    });
 
     /**
      * 3. MOBILE HAMBURGER MENU TOGGLE
@@ -330,5 +388,121 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 300);
             });
         }
+    }
+
+    /**
+     * 10. RESUME PREVIEW MODAL CONTROL
+     * -----------------------------------------------------------------------
+     */
+    const previewCvBtn = document.getElementById('preview-cv-btn');
+    const resumeModal = document.getElementById('resume-modal');
+    const modalCloseBtn = document.getElementById('modal-close');
+
+    if (previewCvBtn && resumeModal && modalCloseBtn) {
+        const openModal = () => {
+            resumeModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+        };
+
+        const closeModal = () => {
+            resumeModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore background scroll
+        };
+
+        previewCvBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        modalCloseBtn.addEventListener('click', closeModal);
+
+        // Close on clicking the background overlay outside modal-content
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                closeModal();
+            }
+        });
+
+        // Close on pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
+
+    /**
+     * 11. COPY EMAIL TO CLIPBOARD UTIL
+     * -----------------------------------------------------------------------
+     */
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const copyIcon = document.getElementById('copy-icon');
+
+    if (copyEmailBtn && copyIcon) {
+        const copyTooltip = copyEmailBtn.querySelector('.copy-tooltip');
+
+        copyEmailBtn.addEventListener('click', async (e) => {
+            e.stopPropagation(); // Stop click from triggering mailto anchor
+            e.preventDefault();
+
+            try {
+                await navigator.clipboard.writeText('ismailhisham610@gmail.com');
+                
+                copyEmailBtn.classList.add('copied');
+                if (copyTooltip) copyTooltip.textContent = 'Copied!';
+                copyIcon.setAttribute('data-lucide', 'check');
+                lucide.createIcons();
+
+                setTimeout(() => {
+                    copyEmailBtn.classList.remove('copied');
+                    if (copyTooltip) copyTooltip.textContent = 'Copy';
+                    copyIcon.setAttribute('data-lucide', 'copy');
+                    lucide.createIcons();
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy email to clipboard: ', err);
+            }
+        });
+    }
+
+    /**
+     * 12. 3D HOVER TILT & GLOSS SHINE EFFECT
+     * -----------------------------------------------------------------------
+     */
+    const tiltElements = document.querySelectorAll('.project-card, .hero-image');
+
+    if (tiltElements.length > 0 && window.matchMedia("(hover: hover)").matches) {
+        tiltElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.transition = 'transform 0.1s ease';
+            });
+
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Normalized coordinates (-0.5 to 0.5)
+                const normX = (x / rect.width) - 0.5;
+                const normY = (y / rect.height) - 0.5;
+
+                // Compute rotation (max 12 degrees)
+                const rotX = -normY * 12;
+                const rotY = normX * 12;
+
+                // Apply transform. If project card, preserve the hover height translate offset
+                const isProjectCard = el.classList.contains('project-card');
+                const translateOffset = isProjectCard ? 'translateY(-8px)' : '';
+                
+                el.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) ${translateOffset}`;
+                el.style.setProperty('--shine-x', `${x}px`);
+                el.style.setProperty('--shine-y', `${y}px`);
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
+                el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+            });
+        });
     }
 });

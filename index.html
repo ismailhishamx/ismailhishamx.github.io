@@ -45,6 +45,9 @@
 <!-- Scroll Progress Bar -->
 <div id="scroll-progress"></div>
 
+<!-- Toast Notification Container -->
+<div id="toast-container" class="toast-container"></div>
+
 <!-- Background Ambient Glow Orbs -->
 <div class="ambient-glow ambient-glow-1"></div>
 <div class="ambient-glow ambient-glow-2"></div>
@@ -64,6 +67,13 @@
             <li><a href="#education">Education</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="color-picker-widget">
+            <button class="color-dot teal active" data-color="teal" aria-label="Teal Theme"></button>
+            <button class="color-dot indigo" data-color="indigo" aria-label="Indigo Theme"></button>
+            <button class="color-dot emerald" data-color="emerald" aria-label="Emerald Theme"></button>
+            <button class="color-dot violet" data-color="violet" aria-label="Violet Theme"></button>
+            <button class="color-dot rose" data-color="rose" aria-label="Rose Theme"></button>
+        </div>
         <button id="theme-toggle" aria-label="Toggle theme">
             <i data-lucide="moon" id="theme-icon"></i>
         </button>
@@ -94,6 +104,9 @@
                     <a href="Ismail_Hisham_Flutter_Developer_resume.pdf" download class="btn btn-outline">
                         Download CV <i data-lucide="download" style="width: 18px"></i>
                     </a>
+                    <button id="preview-cv-btn" class="btn btn-outline">
+                        Preview CV <i data-lucide="eye" style="width: 18px"></i>
+                    </button>
                 </div>
             </div>
             <div class="hero-image">
@@ -158,28 +171,28 @@
                 <div class="skill-card">
                     <h3><i data-lucide="smartphone" style="color: var(--accent)"></i> Mobile</h3>
                     <div class="skill-tags">
-                        <span class="tag">Flutter</span>
-                        <span class="tag">Dart</span>
-                        <span class="tag">Firebase</span>
-                        <span class="tag">REST APIs</span>
-                        <span class="tag">Bloc / Cubit</span>
-                        <span class="tag">Clean Architecture</span>
+                        <span class="tag" data-tooltip="Stateful widgets, animations, custom layout rendering">Flutter</span>
+                        <span class="tag" data-tooltip="Async programming, Streams, collections, generics">Dart</span>
+                        <span class="tag" data-tooltip="Authentication, Firestore, Cloud Messaging, Analytics">Firebase</span>
+                        <span class="tag" data-tooltip="Retrofit, Dio, JSON serialization/deserialization">REST APIs</span>
+                        <span class="tag" data-tooltip="Predictable state management, event-to-state mapping">Bloc / Cubit</span>
+                        <span class="tag" data-tooltip="Separation of concerns (Data, Domain, Presentation layers)">Clean Architecture</span>
                     </div>
                 </div>
                 <div class="skill-card">
                     <h3><i data-lucide="code" style="color: var(--accent)"></i> Languages</h3>
                     <div class="skill-tags">
-                        <span class="tag">Dart</span>
-                        <span class="tag">Java</span>
+                        <span class="tag" data-tooltip="Object-oriented, type-safe development language">Dart</span>
+                        <span class="tag" data-tooltip="Object-oriented structures, interfaces, algorithms">Java</span>
                     </div>
                 </div>
                 <div class="skill-card">
                     <h3><i data-lucide="wrench" style="color: var(--accent)"></i> Tools</h3>
                     <div class="skill-tags">
-                        <span class="tag">Git & GitHub</span>
-                        <span class="tag">Figma</span>
-                        <span class="tag">Android Studio</span>
-                        <span class="tag">Postman</span>
+                        <span class="tag" data-tooltip="Branching, merging, pull requests, version control tracking">Git & GitHub</span>
+                        <span class="tag" data-tooltip="Extracting design components, spacing, and assets">Figma</span>
+                        <span class="tag" data-tooltip="Debugging, profiling, gradle configurations">Android Studio</span>
+                        <span class="tag" data-tooltip="Testing API endpoints and request/response payloads">Postman</span>
                     </div>
                 </div>
             </div>
@@ -207,77 +220,182 @@
             
             <div class="projects-grid">
                 <article class="project-card" data-category="mobile">
-                    <div class="project-card-header">
-                        <div class="project-icon">🚗</div>
-                        <span class="project-badge">Featured</span>
+                    <div class="project-card-info">
+                        <div class="project-card-header">
+                            <div class="project-icon">🚗</div>
+                            <span class="project-badge">Featured</span>
+                        </div>
+                        <h3>Waslny Maak</h3>
+                        <p>Real-time carpooling mobile app for Cairo. Features live location tracking with OpenStreetMap, reliable state management via Bloc, and Firebase backend integration. Designed pixel-perfect with Figma.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Bloc</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ismailhishamx/Waslny-Maak--Carpooling-.git" target="_blank" class="project-link">
+                                Code <i data-lucide="github" style="width: 14px"></i>
+                            </a>
+                        </div>
                     </div>
-                    <h3>Waslny Maak</h3>
-                    <p>Real-time carpooling mobile app for Cairo. Features live location tracking with OpenStreetMap, reliable state management via Bloc, and Firebase backend integration. Designed pixel-perfect with Figma.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Flutter</span>
-                        <span class="tech-tag">Dart</span>
-                        <span class="tech-tag">Bloc</span>
-                        <span class="tech-tag">Firebase</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/ismailhishamx/Waslny-Maak--Carpooling-.git" target="_blank" class="project-link">
-                            Code <i data-lucide="github" style="width: 14px"></i>
-                        </a>
+                    <div class="phone-mockup-wrapper">
+                        <div class="phone-mockup">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen waslny-screen">
+                                <div class="mock-status-bar">
+                                    <span>9:41</span>
+                                    <span class="mock-status-icons">🔋</span>
+                                </div>
+                                <div class="mock-app-bar">Waslny Maak</div>
+                                <div class="mock-app-map">
+                                    <div class="mock-map-route"></div>
+                                    <span class="mock-map-pin start">📍</span>
+                                    <span class="mock-map-pin end">📍</span>
+                                    <span class="mock-car">🚗</span>
+                                </div>
+                                <div class="mock-app-bottom-sheet">
+                                    <div class="mock-handle"></div>
+                                    <div class="mock-ride-info">
+                                        <span class="mock-avatar">🧔</span>
+                                        <div class="mock-driver-details">
+                                            <strong>Ahmed Kamal</strong>
+                                            <span>4.9★ • 5m away</span>
+                                        </div>
+                                    </div>
+                                    <div class="mock-ride-price">50.00 EGP</div>
+                                    <button class="mock-btn-request" type="button">Confirm Ride</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </article>
 
                 <article class="project-card" data-category="mobile">
-                    <div class="project-card-header">
-                        <div class="project-icon">🛍️</div>
-                        <span class="project-badge">Coursework</span>
+                    <div class="project-card-info">
+                        <div class="project-card-header">
+                            <div class="project-icon">🛍️</div>
+                            <span class="project-badge">Coursework</span>
+                        </div>
+                        <h3>Route E-Commerce</h3>
+                        <p>A full-featured shopping application built as part of the Route Academy diploma. Utilizes Clean Architecture, Bloc/Cubit state management, REST API integration, dependency injection, and secure local data persistence.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Clean Arch</span>
+                            <span class="tech-tag">REST API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ismailhishamx" target="_blank" class="project-link">
+                                GitHub <i data-lucide="external-link" style="width: 14px"></i>
+                            </a>
+                        </div>
                     </div>
-                    <h3>Route E-Commerce</h3>
-                    <p>A full-featured shopping application built as part of the Route Academy diploma. Utilizes Clean Architecture, Bloc/Cubit state management, REST API integration, dependency injection, and secure local data persistence.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Flutter</span>
-                        <span class="tech-tag">Dart</span>
-                        <span class="tech-tag">Clean Arch</span>
-                        <span class="tech-tag">REST API</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/ismailhishamx" target="_blank" class="project-link">
-                            GitHub <i data-lucide="external-link" style="width: 14px"></i>
-                        </a>
+                    <div class="phone-mockup-wrapper">
+                        <div class="phone-mockup">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen ecom-screen">
+                                <div class="mock-status-bar">
+                                    <span>9:41</span>
+                                    <span class="mock-status-icons">🔋</span>
+                                </div>
+                                <div class="mock-search-header">
+                                    <div class="mock-search-box">🔍 Search products...</div>
+                                    <div class="mock-cart-badge">🛒<span>3</span></div>
+                                </div>
+                                <div class="mock-promo-banner">Route Sale 50% OFF</div>
+                                <div class="mock-product-grid">
+                                    <div class="mock-product-item">
+                                        <span class="mock-prod-img">👟</span>
+                                        <div class="mock-prod-title">Nike Air</div>
+                                        <div class="mock-prod-price">1,200 EGP</div>
+                                        <button class="mock-add-cart" type="button">+</button>
+                                    </div>
+                                    <div class="mock-product-item">
+                                        <span class="mock-prod-img">⌚</span>
+                                        <div class="mock-prod-title">iWatch</div>
+                                        <div class="mock-prod-price">3,500 EGP</div>
+                                        <button class="mock-add-cart" type="button">+</button>
+                                    </div>
+                                </div>
+                                <div class="mock-bottom-nav">
+                                    <span>🏠</span>
+                                    <span>🔍</span>
+                                    <span>🛒</span>
+                                    <span>👤</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </article>
 
                 <article class="project-card" data-category="mobile">
-                    <div class="project-card-header">
-                        <div class="project-icon">✅</div>
+                    <div class="project-card-info">
+                        <div class="project-card-header">
+                            <div class="project-icon">✅</div>
+                        </div>
+                        <h3>Todo Tasker</h3>
+                        <p>A sleek productivity and task manager mobile app focusing on smooth user experience. Uses Hive for blazing-fast local caching, custom animations, categories, local notifications, and auto dark/light theme switching.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Hive DB</span>
+                            <span class="tech-tag">Cubit</span>
+                            <span class="tech-tag">Notifications</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ismailhishamx" target="_blank" class="project-link">
+                                GitHub <i data-lucide="external-link" style="width: 14px"></i>
+                            </a>
+                        </div>
                     </div>
-                    <h3>Todo Tasker</h3>
-                    <p>A sleek productivity and task manager mobile app focusing on smooth user experience. Uses Hive for blazing-fast local caching, custom animations, categories, local notifications, and auto dark/light theme switching.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Flutter</span>
-                        <span class="tech-tag">Hive DB</span>
-                        <span class="tech-tag">Cubit</span>
-                        <span class="tech-tag">Notifications</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/ismailhishamx" target="_blank" class="project-link">
-                            GitHub <i data-lucide="external-link" style="width: 14px"></i>
-                        </a>
+                    <div class="phone-mockup-wrapper">
+                        <div class="phone-mockup">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen todo-screen">
+                                <div class="mock-status-bar">
+                                    <span>9:41</span>
+                                    <span class="mock-status-icons">🔋</span>
+                                </div>
+                                <div class="mock-app-bar">Task Manager</div>
+                                <div class="mock-todo-list">
+                                    <div class="mock-todo-item checked">
+                                        <span class="mock-checkbox">✓</span>
+                                        <span class="mock-todo-text">Push Waslny Maak</span>
+                                    </div>
+                                    <div class="mock-todo-item checked">
+                                        <span class="mock-checkbox">✓</span>
+                                        <span class="mock-todo-text">Graduate CS B.Sc.</span>
+                                    </div>
+                                    <div class="mock-todo-item">
+                                        <span class="mock-checkbox"></span>
+                                        <span class="mock-todo-text">Practice Cubit state</span>
+                                    </div>
+                                    <div class="mock-todo-item">
+                                        <span class="mock-checkbox"></span>
+                                        <span class="mock-todo-text">Go swimming practice</span>
+                                    </div>
+                                </div>
+                                <div class="mock-fab">+</div>
+                            </div>
+                        </div>
                     </div>
                 </article>
 
                 <article class="project-card" data-category="java">
-                    <div class="project-card-header">
-                        <div class="project-icon">🏦</div>
-                    </div>
-                    <h3>Bank Management</h3>
-                    <p>Robust console application written in Java showcasing advanced OOP practices (Inheritance, Polymorphism, Encapsulation). Manages client and employee entities, bank transfers, and account histories.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Java</span>
-                        <span class="tech-tag">OOP</span>
-                        <span class="tech-tag">Console</span>
-                    </div>
-                    <div class="project-links">
-                        <span class="project-link-disabled">Java OOP Console</span>
+                    <div class="project-card-info">
+                        <div class="project-card-header">
+                            <div class="project-icon">🏦</div>
+                        </div>
+                        <h3>Bank Management</h3>
+                        <p>Robust console application written in Java showcasing advanced OOP practices (Inheritance, Polymorphism, Encapsulation). Manages client and employee entities, bank transfers, and account histories.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">OOP</span>
+                            <span class="tech-tag">Console</span>
+                        </div>
+                        <div class="project-links">
+                            <span class="project-link-disabled">Java OOP Console</span>
+                        </div>
                     </div>
                 </article>
             </div>
@@ -357,9 +475,15 @@
                         I'm seeking a Junior Software Developer or Flutter Developer role to grow and contribute to impactful projects.
                     </p>
                     <div class="social-links">
-                        <a href="mailto:ismailhisham610@gmail.com" class="social-link">
-                            <i data-lucide="mail"></i> ismailhisham610@gmail.com
-                        </a>
+                        <div class="social-link email-container">
+                            <a href="mailto:ismailhisham610@gmail.com" class="email-anchor">
+                                <i data-lucide="mail"></i> ismailhisham610@gmail.com
+                            </a>
+                            <button id="copy-email-btn" class="copy-email-btn" aria-label="Copy email to clipboard">
+                                <i data-lucide="copy" id="copy-icon" style="width: 16px; height: 16px;"></i>
+                                <span class="copy-tooltip">Copy</span>
+                            </button>
+                        </div>
                         <a href="tel:+201020029203" class="social-link">
                             <i data-lucide="phone"></i> +20 102 002 9203
                         </a>
@@ -373,7 +497,7 @@
                 </div>
 
                 <div class="form-wrapper">
-                    <!-- Formspree Endpoint -->
+                    <!-- Form-spree Endpoint -->
                     <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
                         <div class="input-group">
                             <label for="name">Name</label>
@@ -418,6 +542,16 @@
 <button id="back-to-top" aria-label="Back to top">
     <i data-lucide="arrow-up"></i>
 </button>
+
+<!-- Resume Preview Modal -->
+<div id="resume-modal" class="modal">
+    <div class="modal-content">
+        <button id="modal-close" class="modal-close" aria-label="Close modal">
+            <i data-lucide="x"></i>
+        </button>
+        <iframe src="Ismail_Hisham_Flutter_Developer_resume.pdf" width="100%" height="100%"></iframe>
+    </div>
+</div>
 
 <!-- External JS Entry point -->
 <script src="script.js"></script>

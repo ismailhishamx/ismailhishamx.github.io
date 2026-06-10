@@ -1120,3 +1120,613 @@ footer {
     width: 100%;
   }
 }
+
+/*
+===========================================================================
+14. ADVANCED ENHANCEMENTS: COLOR CUSTOMIZER, TOOLTIPS, MODALS, SIMULATORS
+===========================================================================
+*/
+
+/* Accent Color Picker Widget */
+.color-picker-widget {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-right: 0.25rem;
+}
+.color-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0;
+}
+.color-dot:hover {
+  transform: scale(1.25);
+}
+.color-dot.active {
+  border-color: var(--text);
+  transform: scale(1.1);
+}
+.color-dot.teal { background: #0d9488; }
+.color-dot.indigo { background: #4f46e5; }
+.color-dot.emerald { background: #10b981; }
+.color-dot.violet { background: #8b5cf6; }
+.color-dot.rose { background: #f43f5e; }
+
+/* PDF Preview Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1100;
+}
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-content {
+  background: var(--bg);
+  width: 90%;
+  height: 90%;
+  max-width: 900px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.9);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal.active .modal-content {
+  transform: scale(1);
+}
+.modal-content iframe {
+  border: none;
+  background: white;
+}
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: var(--transition);
+}
+.modal-close:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* Copy Email to Clipboard */
+.email-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+.email-anchor {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.copy-email-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: var(--transition);
+  position: relative;
+}
+.copy-email-btn:hover {
+  color: var(--accent);
+  background: var(--accent-light);
+}
+.copy-tooltip {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background: var(--text);
+  color: var(--bg);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  font-family: var(--font-body);
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+}
+.copy-email-btn:hover .copy-tooltip,
+.copy-email-btn.copied .copy-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* CSS Hover Metadata Tooltips on Skill Tags */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-sm);
+  white-space: normal;
+  width: max-content;
+  max-width: 200px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  z-index: 10;
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-body);
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* CSS Mobile Phone Mockup Simulator */
+.phone-mockup-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.phone-mockup {
+  width: 200px;
+  height: 380px;
+  background: #1e293b;
+  border: 8px solid #475569;
+  border-radius: 32px;
+  position: relative;
+  box-shadow: var(--shadow-lg), inset 0 0 10px rgba(0,0,0,0.5);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+[data-theme='light'] .phone-mockup {
+  background: #0f172a;
+  border-color: #cbd5e1;
+}
+.phone-notch {
+  width: 80px;
+  height: 14px;
+  background: #475569;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+[data-theme='light'] .phone-notch {
+  background: #cbd5e1;
+}
+
+/* Simulated App Screen */
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: #0b0f19;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body);
+  overflow: hidden;
+  color: #f8fafc;
+  font-size: 11px;
+}
+.mock-status-bar {
+  height: 20px;
+  padding: 4px 12px 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.55rem;
+  font-weight: 600;
+  z-index: 8;
+  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+}
+.mock-status-icons {
+  font-size: 0.6rem;
+}
+.mock-app-bar {
+  height: 30px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: white;
+}
+
+/* Mock Map Screen for Waslny Maak */
+.waslny-screen .mock-app-map {
+  flex: 1;
+  background: #0b0f19;
+  position: relative;
+  overflow: hidden;
+}
+.waslny-screen .mock-app-map::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 15px 15px;
+}
+.mock-map-route {
+  position: absolute;
+  top: 40%;
+  left: 20%;
+  width: 55%;
+  height: 25%;
+  border-top: 2.5px dashed var(--accent);
+  border-right: 2.5px dashed var(--accent);
+  border-top-right-radius: 12px;
+  animation: route-pulse 2s infinite ease-in-out;
+}
+@keyframes route-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.mock-map-pin {
+  position: absolute;
+  font-size: 0.75rem;
+  z-index: 5;
+}
+.mock-map-pin.start {
+  top: 32%;
+  left: 14%;
+}
+.mock-map-pin.end {
+  top: 60%;
+  left: 70%;
+}
+.mock-car {
+  position: absolute;
+  font-size: 0.75rem;
+  top: 34%;
+  left: 40%;
+  animation: car-movement 6s infinite linear;
+}
+@keyframes car-movement {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  45% { transform: translate(25px, 0) rotate(90deg); }
+  55% { transform: translate(25px, 0) rotate(90deg); }
+  90% { transform: translate(25px, 30px) rotate(90deg); }
+  100% { transform: translate(25px, 30px) rotate(90deg); }
+}
+
+.mock-app-bottom-sheet {
+  background: #1e293b;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.25);
+  color: white;
+}
+.mock-handle {
+  width: 25px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  margin: 0 auto 3px auto;
+}
+.mock-ride-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mock-avatar {
+  font-size: 0.95rem;
+}
+.mock-driver-details {
+  display: flex;
+  flex-direction: column;
+}
+.mock-driver-details strong {
+  font-size: 0.6rem;
+}
+.mock-driver-details span {
+  font-size: 0.5rem;
+  color: #94a3b8;
+}
+.mock-ride-price {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: right;
+  margin-top: -2px;
+}
+.mock-btn-request {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.2s;
+  width: 100%;
+}
+.mock-btn-request:hover {
+  filter: brightness(1.1);
+}
+
+/* Mock E-Commerce Screen for Route E-Commerce */
+.ecom-screen {
+  background: #f8fafc;
+  color: #0f172a;
+}
+.ecom-screen .mock-status-bar {
+  color: rgba(0, 0, 0, 0.6);
+}
+.mock-search-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  gap: 6px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+.mock-search-box {
+  background: #e2e8f0;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 0.5rem;
+  color: #64748b;
+  flex: 1;
+}
+.mock-cart-badge {
+  font-size: 0.65rem;
+  position: relative;
+}
+.mock-cart-badge span {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.4rem;
+  padding: 0px 2px;
+  border-radius: 50%;
+  font-weight: 700;
+  line-height: 1;
+}
+.mock-promo-banner {
+  background: linear-gradient(90deg, #4f46e5, #818cf8);
+  color: white;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 3px;
+  margin: 4px 8px;
+  border-radius: 4px;
+}
+.mock-product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 2px 8px;
+  flex: 1;
+  overflow-y: auto;
+}
+.mock-product-item {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
+}
+.mock-prod-img {
+  font-size: 1.1rem;
+  text-align: center;
+}
+.mock-prod-title {
+  font-size: 0.5rem;
+  font-weight: 600;
+  margin: 1px 0;
+}
+.mock-prod-price {
+  font-size: 0.45rem;
+  font-weight: 700;
+  color: #4f46e5;
+}
+.mock-add-cart {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 12px;
+  height: 12px;
+  background: #0f172a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 0.45rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.ecom-screen .mock-bottom-nav {
+  height: 28px;
+  border-top: 1px solid #e2e8f0;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.65rem;
+}
+
+/* Mock Todo Screen for Todo Tasker */
+.todo-screen {
+  background: #0f172a;
+}
+.todo-screen .mock-app-bar {
+  background: #1e293b;
+}
+.mock-todo-list {
+  flex: 1;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mock-todo-item {
+  background: #1e293b;
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+.mock-checkbox {
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.4rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+.mock-todo-item.checked .mock-checkbox {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+.mock-todo-text {
+  font-size: 0.52rem;
+}
+.mock-todo-item.checked .mock-todo-text {
+  text-decoration: line-through;
+  color: #64748b;
+}
+.mock-fab {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+/* Adjust Mobile Spacing and stretching rules */
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 1023px) {
+  .phone-mockup-wrapper {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 900px) {
+  .color-picker-widget {
+    margin: 0.5rem 0;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* 3D Parallax Tilt & Glossy shine overlay styles */
+.project-card, .hero-image {
+  transform-style: preserve-3d;
+}
+
+.project-card::before, .hero-image::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle 150px at var(--shine-x, 0px) var(--shine-y, 0px), rgba(255, 255, 255, 0.08), transparent 80%);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+[data-theme='dark'] .project-card::before, 
+[data-theme='dark'] .hero-image::before {
+  background: radial-gradient(circle 150px at var(--shine-x, 0px) var(--shine-y, 0px), rgba(255, 255, 255, 0.05), transparent 80%);
+}
+
+.project-card:hover::before, .hero-image:hover::before {
+  opacity: 1;
+}
+
