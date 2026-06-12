@@ -335,7 +335,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(contactForm);
 
             try {
-                const response = await fetch(contactForm.action, {
+                const response = await
+                    
+                    fetch(contactForm.action, {
                     method: 'POST',
                     body: formData,
                     headers: { 'Accept': 'application/json' }
