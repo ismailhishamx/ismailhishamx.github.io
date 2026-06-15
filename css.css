@@ -845,9 +845,11 @@ section:nth-child(even) {
   background: var(--white);
   transition: var(--transition);
 }
-.social-link i {
+.social-link i,
+.social-link svg {
   color: var(--accent);
   width: 20px;
+  height: 20px;
   transition: transform 0.3s;
 }
 .social-link:hover {
@@ -855,7 +857,8 @@ section:nth-child(even) {
   transform: translateX(8px);
   background: var(--accent-light);
 }
-.social-link:hover i {
+.social-link:hover i,
+.social-link:hover svg {
   transform: scale(1.1);
 }
 
@@ -951,7 +954,8 @@ section:nth-child(even) {
   box-shadow: var(--shadow-lg);
   animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-.form-success i {
+.form-success i,
+.form-success svg {
   color: var(--accent);
   margin-bottom: 1.5rem;
 }
