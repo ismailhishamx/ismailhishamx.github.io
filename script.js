@@ -507,4 +507,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    /**
+     * 13. DYNAMIC COPYRIGHT YEAR
+     * -----------------------------------------------------------------------
+     */
+    const copyrightParagraph = document.querySelector('footer p');
+    if (copyrightParagraph) {
+        const currentYear = new Date().getFullYear();
+        copyrightParagraph.innerHTML = `&copy; ${currentYear} Ismail Hisham AlTamboly. Built with passion in Cairo.`;
+    }
 });
